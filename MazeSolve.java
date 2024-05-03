@@ -58,6 +58,9 @@ public class MazeSolve extends JFrame implements ActionListener{
 
     private JPanel mazeBoard; 
 
+    private char startChar = 'X';
+    private char endChar = 'X'; 
+
     //private JButton[][] buttonArray; 
 
     //private JButton[][] mazeButtonArray;
@@ -417,7 +420,21 @@ public class MazeSolve extends JFrame implements ActionListener{
                         //action to perform
                         if (START_CHANGE == true && ifPath(array, finalJ, finalI, width, height) != 0 && ifFree(finalJ, finalI) == true){
 
-                            array[StartY][StartX] = 'X';
+                            //array[StartY][StartX] = 'X';
+                            //array[finalI][finalJ] = 'P';
+                            
+                            if(startChar == 'X'){
+                                array[StartY][StartX] = 'X';
+                            } else {
+                                array[StartY][StartX] = ' ';
+                            }
+
+                            if(array[finalI][finalJ] == 'X'){
+                                startChar = 'X'; 
+                            } else {
+                                startChar = ' '; 
+                            }
+                            //array[EndY][EndX] = 'X';
                             array[finalI][finalJ] = 'P';
 
                             StartY = finalI;
@@ -434,7 +451,18 @@ public class MazeSolve extends JFrame implements ActionListener{
                         }
                         if (END_CHANGE == true && ifPath(array, finalJ, finalI, width, height) != 0  && ifFree(finalJ, finalI) == true){
 
-                            array[EndY][EndX] = 'X';
+                            if(endChar == 'X'){
+                                array[EndY][EndX] = 'X';
+                            } else {
+                                array[EndY][EndX] = ' ';
+                            }
+
+                            if(array[finalI][finalJ] == 'X'){
+                                endChar = 'X'; 
+                            } else {
+                                endChar = ' '; 
+                            }
+                            //array[EndY][EndX] = 'X';
                             array[finalI][finalJ] = 'K';
 
                             EndY = finalI; 
