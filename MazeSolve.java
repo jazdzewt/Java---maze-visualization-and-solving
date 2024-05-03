@@ -1,24 +1,15 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-//import javax.swing.border.CompoundBorder;
-//import javax.swing.border.EmptyBorder;
-//import javax.swing.border.LineBorder;
-//import javax.swing.border.Border;
 
 class Node {
     int x; 
@@ -41,9 +32,6 @@ public class MazeSolve extends JFrame implements ActionListener{
     private int EndY; 
     private int EndX;
 
-    //private int iteratorI = 0; 
-    //private int iteratorJ = 0;
-
     private int MAZE_BUTTON_SIZE = 1; 
     private int MAX_BUTTON_WIDTH = 1;
     private int MAX_BUTTON_HEIGHT = 1;
@@ -61,9 +49,6 @@ public class MazeSolve extends JFrame implements ActionListener{
     private char startChar = 'X';
     private char endChar = 'X'; 
 
-    //private JButton[][] buttonArray; 
-
-    //private JButton[][] mazeButtonArray;
     private void findStartAndEnd (char[][] array, int height, int width){
         for(int i = 0; i < height; i++){
             for(int j = 0; j <= width; j++){
@@ -141,83 +126,22 @@ public class MazeSolve extends JFrame implements ActionListener{
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
 
         mazeBoard = new JPanel(new GridLayout(height2, width2));
-        //Border border = new CompoundBorder(new LineBorder(Color.BLACK),new EmptyBorder(4,4,4,4));
-        
-        //add(mazeBoard);
+
         JPanel buttonPanel = new JPanel(new GridLayout(0, 4));
 
         container.add(mazeBoard);
         container.add(buttonPanel);
         
-        //mazeButtonArray = new JButton[height][width];
-        //int iteratorI = 0; 
-        //int iteratorJ = 0; 
-
-        /*for (int i = 0; i < height; i++) {
-            for (int j = 0; j <= width; j++) {
-                
-                final int finalI = i;
-                final int finalJ = j;
-
-                JButton button = new JButton();
-
-                button.setPreferredSize(new Dimension(MAZE_BUTTON_SIZE, MAZE_BUTTON_SIZE));
-
-                if(array[i][j] == 'X'){
-                    button.setBackground(Color.black);
-                } else if (array[i][j] == ' '){
-                    button.setBackground(Color.white);
-                } else if (array[i][j] == 'P'){
-                    button.setBackground(Color.green);
-                } else {
-                    button.setBackground(Color.red);
-                }
-                
-                button.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        //action to perform
-                        if (START_CHANGE == true){
-
-                            array[StartY][StartX] = 'X';
-                            array[finalI][finalJ] = 'P';
-
-                            StartY = finalI;
-                            StartX = finalJ; 
-                            
-                            START_CHANGE = false;
-                            
-                        }
-                        if (END_CHANGE == true){
-
-                            array[EndY][EndX] = 'X';
-                            array[finalI][finalJ] = 'K';
-
-                            EndY = finalI; 
-                            EndX = finalJ; 
-
-                            END_CHANGE = false; 
-                        }
-                    }
-                });
-                
- 
-                mazeBoard.add(button); 
-            }
-        }*/
-
         initMazeGrid(array2, height2, width2, mazeBoard);
 
         solve = new JButton("Solve");
         solve.setPreferredSize(new Dimension(MAX_BUTTON_HEIGHT, MAX_BUTTON_WIDTH));
-        //solve.setMaximumSize(new Dimension(MAX_BUTTON_WIDTH, MAX_BUTTON_HEIGHT));
         buttonPanel.add(solve);
         solve.addActionListener(this);
 
         changeStart = new JButton("Select Start");
         changeStart.setPreferredSize(new Dimension(MAX_BUTTON_HEIGHT, MAX_BUTTON_WIDTH)); 
         buttonPanel.add(changeStart);
-        //button.setBounds();
         changeStart.addActionListener(this);
 
         changeEnd = new JButton("Select End");
@@ -363,7 +287,6 @@ public class MazeSolve extends JFrame implements ActionListener{
 
         array[yPos][xPos] = 'O';
         enqueue(queue, xPos, yPos);
-        //Node root = new Node(xPos, yPos); 
         enqueueNode(nodeQueue, null, xPos, yPos); 
 
         while (isEnd(array, xPos, yPos) == 0){
@@ -387,8 +310,6 @@ public class MazeSolve extends JFrame implements ActionListener{
         initMazeGrid(array, height, width, mazeBoard);
         mazeBoard.revalidate();
         mazeBoard.repaint();
-
-        //clearMaze(array2, height2, width2);
     }
 
     public void initMazeGrid(char[][] array, int height, int width, JPanel mazeBoard){
@@ -419,9 +340,6 @@ public class MazeSolve extends JFrame implements ActionListener{
                     public void actionPerformed(ActionEvent e) {
                         //action to perform
                         if (START_CHANGE == true && ifPath(array, finalJ, finalI, width, height) != 0 && ifFree(finalJ, finalI) == true){
-
-                            //array[StartY][StartX] = 'X';
-                            //array[finalI][finalJ] = 'P';
                             
                             if(startChar == 'X'){
                                 array[StartY][StartX] = 'X';
@@ -434,7 +352,7 @@ public class MazeSolve extends JFrame implements ActionListener{
                             } else {
                                 startChar = ' '; 
                             }
-                            //array[EndY][EndX] = 'X';
+
                             array[finalI][finalJ] = 'P';
 
                             StartY = finalI;
@@ -462,7 +380,7 @@ public class MazeSolve extends JFrame implements ActionListener{
                             } else {
                                 endChar = ' '; 
                             }
-                            //array[EndY][EndX] = 'X';
+
                             array[finalI][finalJ] = 'K';
 
                             EndY = finalI; 
