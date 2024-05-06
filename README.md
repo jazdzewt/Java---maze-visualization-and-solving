@@ -1,4 +1,2 @@
 # Java Maze App
-App reads .txt or .bin files with a saved maze map (has to be an appropriate format) then displays it as a graphic map. 
-It allows user to change Beggining_Point and Exit_Point according to preferences by selecting a button and then choosing the maze cell.
-It solves the labirynth searching for the shortest path using BFS algorithm and displays it. 
+This project aims to develop a software application capable of reading maze maps stored in either plain text (.txt) or binary (.bin) formats, rendering them graphically, facilitating user-defined adjustments to the starting and exit points within the maze, and employing the Breadth-First Search (BFS) algorithm to ascertain the shortest path from the designated starting point to the exit. The application addresses key functionalities such as file parsing, graphical representation, user interaction, algorithmic computation, and visual feedback.
